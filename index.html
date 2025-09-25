@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insight Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Insight Dashboard</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="card-container" class="card-container"></div>
+    </div>
+
+    <script>
+        fetch('metadata.json')
+            .then(response => response.json())
+            .then(data => {
+                const cardContainer = document.getElementById('card-container');
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+
+                    const title = document.createElement('h2');
+                    title.textContent = item.title;
+
+                    const caption = document.createElement('p');
+                    caption.className = 'caption';
+                    caption.textContent = item.caption;
+                    
+                    const date = document.createElement('p');
+                    date.className = 'date';
+                    date.textContent = item.date;
+
+                    const link = document.createElement('a');
+                    link.href = item.url;
+                    link.textContent = 'View Page';
+
+                    card.appendChild(title);
+                    card.appendChild(caption);
+                    card.appendChild(date);
+                    card.appendChild(link);
+
+                    cardContainer.appendChild(card);
+                });
+            });
+    </script>
+</body>
+</html>
